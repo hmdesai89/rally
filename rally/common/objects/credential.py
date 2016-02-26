@@ -24,7 +24,7 @@ class Credential(object):
                  domain_name=None, endpoint=None,
                  user_domain_name="Default", admin_domain_name="Default",
                  project_domain_name="Default",
-                 https_insecure=False, https_cacert=None):
+                 https_insecure=False, https_cacert=None, access=None, secret=None):
         self.auth_url = auth_url
         self.username = username
         self.password = password
@@ -39,10 +39,13 @@ class Credential(object):
         self.endpoint = endpoint
         self.insecure = https_insecure
         self.cacert = https_cacert
+        self.access = access
+        self.secret = secret
 
     def to_dict(self, include_permission=False):
         dct = {"auth_url": self.auth_url, "username": self.username,
                "password": self.password, "tenant_name": self.tenant_name,
+               "access" : self.access , "secret" : self.secret,
                "region_name": self.region_name,
                "endpoint_type": self.endpoint_type,
                "domain_name": self.domain_name,

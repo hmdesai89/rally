@@ -17,7 +17,6 @@ from rally.common import objects
 from rally import consts
 from rally.deployment import engine
 
-
 @engine.configure(name="ExistingCloud")
 class ExistingCloud(engine.Engine):
     """Just use an existing OpenStack deployment without deploying anything.
@@ -66,6 +65,8 @@ class ExistingCloud(engine.Engine):
                 "properties": {
                     "username": {"type": "string"},
                     "password": {"type": "string"},
+                    "access" : {"type": "string"},
+                    "secret" : {"type": "string"},
                 },
                 "oneOf": [
                     {
@@ -130,12 +131,13 @@ class ExistingCloud(engine.Engine):
             admin_domain_name=user.get("admin_domain_name", "Default"),
             project_domain_name=user.get("project_domain_name", "Default"),
             https_insecure=common.get("https_insecure", False),
-            https_cacert=common.get("https_cacert")
+            https_cacert=common.get("https_cacert"),
+            access=user["access"],
+            secret=user["secret"]
         )
 
     def deploy(self):
         permissions = consts.EndpointPermission
-
         users = [self._create_credential(self.config, user, permissions.USER)
                  for user in self.config.get("users", [])]
 

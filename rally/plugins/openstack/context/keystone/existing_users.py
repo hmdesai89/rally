@@ -49,6 +49,7 @@ class ExistingUsers(users.UserContextMixin, context.Context):
         self.context["tenants"] = {}
 
         for user in self.config:
+            
             user_credential = objects.Credential(**user)
             user_kclient = osclients.Clients(user_credential).keystone()
 
