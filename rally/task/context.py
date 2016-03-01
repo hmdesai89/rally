@@ -24,6 +24,7 @@ from rally.common.plugin import plugin
 from rally.common import utils
 from rally import exceptions
 from rally.task import functional
+import pdb
 
 LOG = logging.getLogger(__name__)
 
@@ -203,6 +204,7 @@ class ContextManager(object):
 
     def __enter__(self):
         try:
+            pdb.set_trace()
             self.setup()
         except Exception:
             self.cleanup()

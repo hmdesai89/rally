@@ -17,6 +17,8 @@ from rally.common import objects
 from rally import consts
 from rally.deployment import engine
 
+
+
 @engine.configure(name="ExistingCloud")
 class ExistingCloud(engine.Engine):
     """Just use an existing OpenStack deployment without deploying anything.
@@ -91,7 +93,7 @@ class ExistingCloud(engine.Engine):
 
         "properties": {
             "type": {"type": "string"},
-            "auth_url": {"type": "string"},
+            #"auth_url": {"type": "string"},
             "region_name": {"type": "string"},
             "endpoint_type": {"type": "string",
                               "enum": [consts.EndpointType.ADMIN,
@@ -105,7 +107,9 @@ class ExistingCloud(engine.Engine):
                 "properties": {
                     "admin": {"$ref": "#/definitions/user"}
                 },
-                "required": ["type", "auth_url", "admin"]
+                #"required": ["type", "auth_url", "admin"]
+                "required": ["type", "admin"]
+
             },
             {
                 "users": {
@@ -119,7 +123,7 @@ class ExistingCloud(engine.Engine):
 
     def _create_credential(self, common, user, permission):
         return objects.Credential(
-            common["auth_url"], user["username"], user["password"],
+            user["username"], user["password"],
             tenant_name=user.get("project_name", user.get("tenant_name")),
             permission=permission,
             region_name=common.get("region_name"),
@@ -144,7 +148,6 @@ class ExistingCloud(engine.Engine):
         admin = self._create_credential(self.config,
                                         self.config.get("admin"),
                                         permissions.ADMIN)
-
         return {"admin": admin, "users": users}
 
     def cleanup(self):

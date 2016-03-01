@@ -25,7 +25,6 @@ from rally import consts
 from rally.deployment.serverprovider import provider
 from rally import exceptions
 
-
 LOG = logging.getLogger(__name__)
 
 

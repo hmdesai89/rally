@@ -693,10 +693,12 @@ class Clients(object):
                 raise exceptions.InvalidAdminException(
                     username=self.credential.username)
         except keystone_exceptions.Unauthorized:
-            raise exceptions.InvalidEndpointsException()
+            return client
+            #raise exceptions.InvalidEndpointsException()
         except keystone_exceptions.AuthorizationFailure:
-            raise exceptions.HostUnreachableException(
-                url=self.credential.auth_url)
+            return client
+            #raise exceptions.HostUnreachableException(
+            #    url=self.credential.auth_url)
         return client
 
     def services(self):

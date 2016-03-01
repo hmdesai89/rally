@@ -40,7 +40,6 @@ from rally import plugins
 from rally.task.processing import plot
 from rally.task.processing import utils
 
-
 class FailedToLoadTask(exceptions.RallyException):
     msg_fmt = _("Failed to load task")
 

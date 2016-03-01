@@ -267,12 +267,12 @@ class DeploymentCommands(object):
             if credential.get("https_cacert"):
                 env_file.write("export OS_CACERT='%s'\n" %
                                credential["https_cacert"])
-            if re.match(r"^/v3/?$", parse.urlparse(
-                    credential["auth_url"]).path) is not None:
-                env_file.write("export OS_USER_DOMAIN_NAME='%s'\n"
-                               "export OS_PROJECT_DOMAIN_NAME='%s'\n" %
-                               (credential["user_domain_name"],
-                                credential["project_domain_name"]))
+            #if re.match(r"^/v3/?$", parse.urlparse(
+            #        credential["auth_url"]).path) is not None:
+            #    env_file.write("export OS_USER_DOMAIN_NAME='%s'\n"
+            #                   "export OS_PROJECT_DOMAIN_NAME='%s'\n" %
+            #                   (credential["user_domain_name"],
+            #                    credential["project_domain_name"]))
         expanded_path = os.path.expanduser("~/.rally/openrc")
         if os.path.exists(expanded_path):
             os.remove(expanded_path)

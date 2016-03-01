@@ -18,7 +18,7 @@ from rally import consts
 
 class Credential(object):
 
-    def __init__(self, auth_url, username, password, tenant_name=None,
+    def __init__(self, username, password,auth_url=None, tenant_name=None,
                  permission=consts.EndpointPermission.USER,
                  region_name=None, endpoint_type=consts.EndpointType.PUBLIC,
                  domain_name=None, endpoint=None,

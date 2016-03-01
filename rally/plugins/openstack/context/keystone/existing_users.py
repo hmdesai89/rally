@@ -51,19 +51,28 @@ class ExistingUsers(users.UserContextMixin, context.Context):
         for user in self.config:
             
             user_credential = objects.Credential(**user)
-            user_kclient = osclients.Clients(user_credential).keystone()
+            #user_kclient = osclients.Clients(user_credential).keystone()
 
-            if user_kclient.tenant_id not in self.context["tenants"]:
-                self.context["tenants"][user_kclient.tenant_id] = {
-                    "id": user_kclient.tenant_id,
-                    "name": user_kclient.tenant_name
-                }
+            #if user_kclient.tenant_id not in self.context["tenants"]:
+            #    self.context["tenants"][user_kclient.tenant_id] = {
+            #        "id": user_kclient.tenant_id,
+            #        "name": user_kclient.tenant_name
+            #    }
+
+            #self.context["users"].append({
+            #    "credential": user_credential,
+            #    "id": user_kclient.user_id,
+            #    "tenant_id": user_kclient.tenant_id
+            #})
+
+
 
             self.context["users"].append({
                 "credential": user_credential,
-                "id": user_kclient.user_id,
-                "tenant_id": user_kclient.tenant_id
+                "id": "1231243434",
+                "tenant_id": "123234456"
             })
+
 
     @logging.log_task_wrapper(LOG.info, _("Exit context: `existing_users`"))
     def cleanup(self):

@@ -68,7 +68,9 @@ class UserContextMixin(object):
                 scenario_ctx[key] = value
 
         user = random.choice(context_obj["users"])
-        tenant = context_obj["tenants"][user["tenant_id"]]
+        #tenant = context_obj["tenants"][user["tenant_id"]]
+        #putting fake tenant id on order duoe this code. We are not using this
+        tenant = "12343445435"
         scenario_ctx["user"], scenario_ctx["tenant"] = user, tenant
 
         return scenario_ctx
